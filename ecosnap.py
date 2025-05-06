@@ -20,7 +20,6 @@ import random
 
 st.set_page_config(page_title="EcoSnap", layout="wide")
 
-"""In-Memory Databases (Mock)"""
 
 # Stores user data (like CO2 saved, streaks)
 db_users = {}
@@ -39,7 +38,6 @@ db_csr = {
     "CSR2": ["user4", "user5"]
 }
 
-"""Dummy AI Classifier"""
 
 # Simulated AI classifier for recognizing eco-friendly actions from images
 ACTION_LABELS = {
@@ -54,7 +52,6 @@ def dummy_ai_analyzer(image_bytes):
     # Randomly returns an action (simulating AI output)
     return random.choice(list(ACTION_LABELS.keys()))
 
-"""Estimate CO₂ Savings"""
 
 # Estimates CO₂ savings based on detected action and optional distance
 def estimate_co2(action_idx, parameters):
@@ -72,7 +69,6 @@ def estimate_co2(action_idx, parameters):
     else:
         return base
 
-"""Track Streaks"""
 
 # Updates daily streaks for users based on current date
 def update_user_streak(user_id, current_date):
@@ -94,7 +90,6 @@ def update_user_streak(user_id, current_date):
     db_users[user_id] = user
     return streak
 
-"""Update CO₂ & Rewards"""
 
 def update_user_co2(user_id, co2):
     user = db_users.get(user_id, {})
@@ -117,7 +112,6 @@ def update_user_co2(user_id, co2):
     user["available_rewards"] = rewards
     db_users[user_id] = user
 
-"""Start Streamlit App UI"""
 
 def main():
     st.title("EcoSnap App 🌍 – Sustainable Action Tracker")
