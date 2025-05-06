@@ -9,18 +9,6 @@ Original file is located at
 Install Required Packages
 """
 
-# Automatically installs missing packages required for the app to run
-import sys
-import subprocess
-import pkg_resources
-
-required = {'streamlit', 'pyngrok', 'Pillow'}
-installed = {pkg.key for pkg in pkg_resources.working_set}
-missing = required - installed
-
-if missing:
-    subprocess.check_call([sys.executable, '-m', 'pip', 'install', *missing])
-
 # Core imports
 import streamlit as st
 from PIL import Image
@@ -29,11 +17,6 @@ import base64
 from io import BytesIO
 from datetime import datetime, timedelta
 import random
-
-# Required to tunnel Streamlit app on Colab using ngrok
-from pyngrok import ngrok
-import threading
-import time
 
 """In-Memory Databases (Mock)"""
 
