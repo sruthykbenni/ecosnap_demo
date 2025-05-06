@@ -116,7 +116,7 @@ def update_user_co2(user_id, co2):
     db_users[user_id] = user
 
 """Start Streamlit App UI"""
-
+st.set_page_config(page_title="EcoSnap", layout="wide")
 def main():
     st.set_page_config(page_title="EcoSnap", layout="wide")
     st.title("EcoSnap App 🌍 – Sustainable Action Tracker")
