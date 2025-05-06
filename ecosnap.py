@@ -120,7 +120,6 @@ def update_user_co2(user_id, co2):
 """Start Streamlit App UI"""
 
 def main():
-    st.set_page_config(page_title="EcoSnap", layout="wide")
     st.title("EcoSnap App 🌍 – Sustainable Action Tracker")
 
     menu = ["EcoSnap Camera", "Streak Tracker", "Leaderboard", "Reward Center", "CSR Dashboard", "Personal Dashboard"]
