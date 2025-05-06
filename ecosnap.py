@@ -18,8 +18,10 @@ from io import BytesIO
 from datetime import datetime, timedelta
 import random
 
-"""In-Memory Databases (Mock)"""
 st.set_page_config(page_title="EcoSnap", layout="wide")
+
+"""In-Memory Databases (Mock)"""
+
 # Stores user data (like CO2 saved, streaks)
 db_users = {}
 
