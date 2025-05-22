@@ -21,7 +21,7 @@ def download_models():
     downloaded_paths = {}
 
     for filename, file_id in file_ids.items():
-        url = f"https://drive.google.com/file/d/{file_ids}/view?usp=drive_link"
+        url = f"https://drive.google.com/file/d/{file_id}/view?usp=drive_link"
         model_path = os.path.join(model_dir, filename)
 
         if not os.path.exists(model_path):
