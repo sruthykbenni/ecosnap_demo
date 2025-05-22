@@ -7,14 +7,29 @@ import gdown
 
 # Download and cache the model file
 @st.cache_resource
-def download_model():
-    model_path = "features/eco_model.tflite"
-    if not os.path.exists(model_path):
-        st.info("Downloading model. Please wait...")
-        file_id = "1tMempqoCdeIGKPVK5O-Q7GHaawVC9n1E"  # Replace with your actual Google Drive file ID
-        url = f"https://drive.google.com/uc?id={file_id}"
-        gdown.download(url, model_path, quiet=False)
-    return model_path
+def download_models():
+    # File IDs from Google Drive
+    file_ids = {
+        "eco_model.h5": "1QtzuTcepTBiFXriTMxc-X8lXRfvrqlql",
+        "eco_model.keras": "1V9TKKIsd-VDduqPnlNc8n1rc4KkG7Rq0",
+        "eco_model.tflite": "1tMempqoCdeIGKPVK5O-Q7GHaawVC9n1E"
+    }
+
+    model_dir = "models"
+    os.makedirs(model_dir, exist_ok=True)
+
+    downloaded_paths = {}
+
+    for filename, file_id in file_ids.items():
+        url = f"https://drive.google.com/file/d/{file_ids}/view?usp=drive_link"
+        model_path = os.path.join(model_dir, filename)
+
+        if not os.path.exists(model_path):
+            gdown.download(url, model_path, quiet=False)
+
+        downloaded_paths[filename] = model_path
+
+    return downloaded_paths  # Dictionary with paths to all models
 
 # Load class labels from file
 def load_labels(label_path="class_labels.txt"):
@@ -49,8 +64,11 @@ def ai_analyzer():
 
     labels = load_labels()
 
-    model_path = download_model()
-    interpreter = load_model(model_path)
+    st.info("Downloading model. Please wait...")
+    model_paths = download_models()
+    tflite_model_path = model_paths["eco_model.tflite"]
+
+    interpreter = load_model(tflite_model_path)
 
     uploaded_file = st.file_uploader("Upload an image of your eco-action", type=["png", "jpg", "jpeg"])
 
