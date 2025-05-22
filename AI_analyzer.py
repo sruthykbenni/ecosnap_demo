@@ -14,7 +14,7 @@ def download_tflite_model():
     model_path = os.path.join(model_dir, "eco_model.tflite")
 
     if not os.path.exists(model_path):
-        url = f"https://drive.google.com/uc?id={file_id}"
+        url = f"https://drive.google.com/uc?id=1tMempqoCdeIGKPVK5O-Q7GHaawVC9n1E"
         gdown.download(url, model_path, quiet=False)
 
     return model_path
