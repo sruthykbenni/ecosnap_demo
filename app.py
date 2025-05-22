@@ -20,7 +20,7 @@ def main():
     # Sidebar navigation
     pages = {
         "🌏 Home": "home",
-        "📷 EcoSnap Camera": ecosnap_camera,
+        "📷 EcoSnap Camera": eco_snap_camera,
         "🧩 AI Analyzer": ai_analyzer,
         "📊 CO₂ Estimator": co2_estimator,
         "📈 Personal Dashboard": personal_dashboard,
