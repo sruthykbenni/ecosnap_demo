@@ -5,38 +5,21 @@ from PIL import Image
 import os
 import gdown
 
-# Download and cache the model file
-@st.cache_resource
-def download_models():
-    # File IDs from Google Drive
-    file_ids = {
-        "eco_model.h5": "1QtzuTcepTBiFXriTMxc-X8lXRfvrqlql",
-        "eco_model.keras": "1V9TKKIsd-VDduqPnlNc8n1rc4KkG7Rq0",
-        "eco_model.tflite": "1tMempqoCdeIGKPVK5O-Q7GHaawVC9n1E"
-    }
-
+# Simple function to download only the TFLite model and return the path
+def download_tflite_model():
+    file_id = "1tMempqoCdeIGKPVK5O-Q7GHaawVC9n1E"
     model_dir = "models"
     os.makedirs(model_dir, exist_ok=True)
 
-    downloaded_paths = {}
+    model_path = os.path.join(model_dir, "eco_model.tflite")
 
-    for filename, file_id in file_ids.items():
-        url = f"https://drive.google.com/file/d/{file_id}/view?usp=drive_link"
-        model_path = os.path.join(model_dir, filename)
+    if not os.path.exists(model_path):
+        url = f"https://drive.google.com/uc?id={file_id}"
+        gdown.download(url, model_path, quiet=False)
 
-        if not os.path.exists(model_path):
-            gdown.download(url, model_path, quiet=False)
+    return model_path
 
-        downloaded_paths[filename] = model_path
-
-    return downloaded_paths  # Dictionary with paths to all models
-
-# Load class labels from file
-def load_labels(label_path="class_labels.txt"):
-    with open(label_path, "r") as f:
-        return [line.strip() for line in f.readlines()]
-
-# Load the TensorFlow Lite model
+# Load the TensorFlow Lite model interpreter
 def load_model(model_path):
     interpreter = tf.lite.Interpreter(model_path=model_path)
     interpreter.allocate_tensors()
@@ -58,17 +41,19 @@ def classify_image(interpreter, image):
     confidence_score = output_data[0][predicted_class]
     return predicted_class, confidence_score
 
+# Load class labels from file
+def load_labels(label_path="class_labels.txt"):
+    with open(label_path, "r") as f:
+        return [line.strip() for line in f.readlines()]
+
 # Streamlit interface for AI Analyzer
 def ai_analyzer():
     st.title("🤖 AI Analyzer: Classify Your Eco-Friendly Action")
 
     labels = load_labels()
 
-    st.info("Downloading model. Please wait...")
-    model_paths = download_models()
-    tflite_model_path = model_paths["eco_model.tflite"]
-
-    interpreter = load_model(tflite_model_path)
+    model_path = download_tflite_model()
+    interpreter = load_model(model_path)
 
     uploaded_file = st.file_uploader("Upload an image of your eco-action", type=["png", "jpg", "jpeg"])
 
@@ -92,3 +77,6 @@ def ai_analyzer():
             if st.button("Confirm Action"):
                 st.session_state["classified_action"] = corrected_label
                 st.success(f"Action '{corrected_label}' saved. You can now estimate CO₂ savings.")
+
+if __name__ == "__main__":
+    ai_analyzer()
