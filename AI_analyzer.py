@@ -7,14 +7,14 @@ import gdown
 
 # Simple function to download only the TFLite model and return the path
 def download_tflite_model():
-    file_id = "1tMempqoCdeIGKPVK5O-Q7GHaawVC9n1E"
+    file_id = "10a38E71qvm_joSWf9YU_5Zdhk98FmYd9"
     model_dir = "models"
     os.makedirs(model_dir, exist_ok=True)
 
     model_path = os.path.join(model_dir, "eco_model.tflite")
 
     if not os.path.exists(model_path):
-        url = f"https://drive.google.com/uc?id=1tMempqoCdeIGKPVK5O-Q7GHaawVC9n1E"
+        url = f"https://drive.google.com/uc?id=10a38E71qvm_joSWf9YU_5Zdhk98FmYd9"
         gdown.download(url, model_path, quiet=False)
 
     return model_path
@@ -48,7 +48,7 @@ def load_labels(label_path="class_labels.txt"):
 
 # Streamlit interface for AI Analyzer
 def ai_analyzer():
-    st.title("🤖 AI Analyzer: Classify Your Eco-Friendly Action")
+    st.title("AI Analyzer: Classify Your Eco-Friendly Action")
 
     labels = load_labels()
 
