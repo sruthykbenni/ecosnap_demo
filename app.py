@@ -19,20 +19,21 @@ def main():
 
     # Sidebar navigation
     pages = {
-        "🏠 Home": None,
-        "📸 EcoSnap Camera": eco_snap_camera,
-        "🤖 AI Analyzer": ai_analyzer,
-        "🌍 CO₂ Estimator": co2_estimator,
-        "🔥 Streak Tracker": streak_tracker,
-        "🏆 Leaderboards": leaderboard,
-        "🎁 Reward Center": reward_center,
-        "📊 CSR Dashboard": csr_dashboard,
+        "🌏 Home": "home",
+        "📷 EcoSnap Camera": ecosnap_camera,
+        "🧩 AI Analyzer": ai_analyzer,
+        "📊 CO₂ Estimator": co2_estimator,
         "📈 Personal Dashboard": personal_dashboard,
+        "🌱 CSR Dashboard": csr_dashboard,
+        "🏆 Leaderboards": leaderboard,
+        "🔥 Streak Tracker": streak_tracker,
+        "⭐ Reward Center": reward_center
     }
 
-    choice = st.sidebar.radio("Go to", list(pages.keys()))
+    choice = st.sidebar.radio("Choose a feature:", list(PAGES.keys()))
+    st.sidebar.title("🌿 EcoSnap Navigation")
 
-    if choice == "🏠 Home":
+    if choice == "🌏 Home":
         st.header("Get Started")
         st.write("Upload an image, track your actions, and explore the impact of your eco-friendly choices!")
     else:
