@@ -1,6 +1,0 @@
-cloth_vs_plastic
-composting
-public_transport
-reusable_bags
-bicycle_use
-tree_planting
