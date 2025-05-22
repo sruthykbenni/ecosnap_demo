@@ -14,8 +14,8 @@ from Streak_tracker import streak_tracker
 # Main App Layout
 def main():
     st.set_page_config(page_title="EcoSnap 🌿", layout="wide")
-    st.sidebar.title("🌿 EcoSnap Navigation")
-    st.title("🌱 Welcome to EcoSnap")
+    st.sidebar.title("EcoSnap Navigation")
+    st.title("🌏 Welcome to EcoSnap")
     st.markdown("Track your eco-actions, estimate CO₂ savings, and earn rewards!")
 
     # Sidebar navigation
