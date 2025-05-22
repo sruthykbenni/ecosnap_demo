@@ -1,9 +1,5 @@
 # Trigger rebuild
 import streamlit as st
-import sys
-import streamlit as st
-st.write("Using Python version:", sys.version)
-
 
 # Import feature modules
 from AI_analyzer import ai_analyzer
