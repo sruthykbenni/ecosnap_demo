@@ -1,14 +1,14 @@
 import streamlit as st
 
-# Import feature modules (no Firebase)
-from features.AI_analyzer import ai_analyzer
-from features.Co2_estimator import co2_estimator
-from features.CSR_dashboard import csr_dashboard
-from features.Ecosnap_camera import eco_snap_camera
-from features.Leaderboards import leaderboard
-from features.Personal_dashboard import personal_dashboard
-from features.Reward_center import reward_center
-from features.Streak_tracker import streak_tracker
+# Import feature modules
+from AI_analyzer import ai_analyzer
+from Co2_estimator import co2_estimator
+from CSR_dashboard import csr_dashboard
+from Ecosnap_camera import eco_snap_camera
+from Leaderboards import leaderboard
+from Personal_dashboard import personal_dashboard
+from Reward_center import reward_center
+from Streak_tracker import streak_tracker
 
 # Main App Layout
 def main():
