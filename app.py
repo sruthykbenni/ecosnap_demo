@@ -30,7 +30,7 @@ def main():
         "⭐ Reward Center": reward_center
     }
 
-    choice = st.sidebar.radio("Choose a feature:", list(PAGES.keys()))
+    choice = st.sidebar.radio("Choose a feature:", list(pages.keys()))
     st.sidebar.title("🌿 EcoSnap Navigation")
 
     if choice == "🌏 Home":
