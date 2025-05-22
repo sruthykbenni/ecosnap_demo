@@ -2,6 +2,19 @@ import streamlit as st
 import numpy as np
 import tensorflow as tf
 from PIL import Image
+import os
+import gdown
+
+# Download and cache the model file
+@st.cache_resource
+def download_model():
+    model_path = "features/eco_model.tflite"
+    if not os.path.exists(model_path):
+        st.info("Downloading model. Please wait...")
+        file_id = "1tMempqoCdeIGKPVK5O-Q7GHaawVC9n1E"  # Replace with your actual Google Drive file ID
+        url = f"https://drive.google.com/uc?id={file_id}"
+        gdown.download(url, model_path, quiet=False)
+    return model_path
 
 # Load class labels from file
 def load_labels(label_path="class_labels.txt"):
@@ -9,7 +22,7 @@ def load_labels(label_path="class_labels.txt"):
         return [line.strip() for line in f.readlines()]
 
 # Load the TensorFlow Lite model
-def load_model(model_path="eco_model.tflite"):
+def load_model(model_path):
     interpreter = tf.lite.Interpreter(model_path=model_path)
     interpreter.allocate_tensors()
     return interpreter
@@ -34,9 +47,10 @@ def classify_image(interpreter, image):
 def ai_analyzer():
     st.title("🤖 AI Analyzer: Classify Your Eco-Friendly Action")
 
-    labels = load_labels("features/class_labels.txt")
+    labels = load_labels()
 
-    interpreter = load_model("features/eco_model.tflite")
+    model_path = download_model()
+    interpreter = load_model(model_path)
 
     uploaded_file = st.file_uploader("Upload an image of your eco-action", type=["png", "jpg", "jpeg"])
 
